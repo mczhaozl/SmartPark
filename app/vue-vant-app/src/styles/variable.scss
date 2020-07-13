@@ -1,0 +1,82 @@
+@charset "utf-8";
+/**
+ * 本文件已经全局混入，可在页面直接使用请谨慎修改 
+ * @author wfyuan 2020-2-18
+ */
+// 颜色
+$colorDark:#333333;
+$colorDefault:#666;
+$colorLight:#999999;
+$colorLighter:#f8f6f9; // 浅灰色背景色
+$colorMain:#005BAC;
+$colorWaring: #F5A200;
+$colorDanger: #E54E4E;
+$colorSuccess: #4CCB65;
+$colorWhite: #fff;
+
+// 文字大小
+$textXs: 12px;
+$textSm: 14px;
+$textDefault: 16px;
+$textXl: 18px;
+$textXxl: 20px;
+
+// 常用尺寸
+$null: 0px;
+$xs: 5px;
+$sm: 10px;
+$default: 16px;
+$xl: 20px;
+
+// 使用方法：  background: url("#{$bg-path}/card-bg.png" center center);
+$publicImages: "/assets/images"; // public根目录下图片地址
+$imagesPath: '@/assets/images'; // src目录下图片路径
+
+// 相互嵌入 @mixin @include
+/**
+ * @description 圆角
+ * 使用方法 @include borderRadius();
+ */
+@mixin borderRadius($conor: 10px) {
+    -webkit-border-radius: $conor;
+    -moz-border-radius: $conor;
+    border-radius: $conor;
+}
+/**
+ * @description flex 外框
+ * 使用方法 @include displayFlex();
+ */
+@mixin displayFlex($vertical: center, $level: center) {
+    display: flex;
+    justify-content: $level;
+    align-items: $vertical;
+}
+/**
+ * @description 项目中常见的白色框方法
+ * 使用方法 @include commonWarp();
+ */
+@mixin commonWarp() {
+    background-color: $colorWhite;
+    padding: 0 $sm;
+    box-shadow: 0px 3px 5px #ccc;
+    @include borderRadius();
+}
+
+/**
+ * @description 内容装载框
+ * 使用方法 @include container();
+ */
+ @mixin container($top: 50px, $background: unset) {
+    width: 100vw; 
+    padding: 0 $sm;
+    height: auto; 
+    position: absolute; 
+    top: $top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $background;
+    overflow-y: scroll;
+    padding-bottom: 50px;
+    font-size: 14px;
+ }

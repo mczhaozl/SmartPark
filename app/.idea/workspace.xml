@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ac8fe4ff-9b6f-40ba-a298-9094b320762f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1cDJusYkYrHakpahNIKWkuSJhW1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="G:/vant--mobile-mall-dev" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\app\vue-vant-app\src\router\modules" />
+      <recent name="F:\app\vue-vant-app\src\assets\images" />
+      <recent name="F:\app\vue-vant-app\src" />
+      <recent name="F:\app\platforms\android\app\src\main\assets\www" />
+      <recent name="F:\app\www" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\app\vue-vant-app\src\views\Appointment\index" />
+      <recent name="F:\app\vue-vant-app\public" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue-vant-app/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue-vant-app/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.serve" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac8fe4ff-9b6f-40ba-a298-9094b320762f" name="Default Changelist" comment="" />
+      <created>1590057455817</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590057455817</updated>
+      <workItem from="1590057458072" duration="2536000" />
+      <workItem from="1590113416959" duration="451000" />
+      <workItem from="1590114203410" duration="820000" />
+      <workItem from="1590115389800" duration="7351000" />
+      <workItem from="1590132734537" duration="8220000" />
+      <workItem from="1590366962284" duration="65874000" />
+      <workItem from="1590501488053" duration="86000" />
+      <workItem from="1590540282429" duration="959000" />
+      <workItem from="1590541265637" duration="172000" />
+      <workItem from="1590543715870" duration="4650000" />
+      <workItem from="1590551118084" duration="15412000" />
+      <workItem from="1591860317707" duration="779000" />
+      <workItem from="1592787589786" duration="77000" />
+      <workItem from="1592793920011" duration="2664000" />
+      <workItem from="1592797184174" duration="730000" />
+      <workItem from="1592872582890" duration="9168000" />
+      <workItem from="1592891864725" duration="20768000" />
+      <workItem from="1592979493441" duration="8899000" />
+      <workItem from="1592989922204" duration="1456000" />
+      <workItem from="1593306121530" duration="9016000" />
+      <workItem from="1593329220389" duration="4826000" />
+      <workItem from="1593392880275" duration="11839000" />
+      <workItem from="1593412641118" duration="2612000" />
+      <workItem from="1593416452044" duration="4600000" />
+      <workItem from="1594205693149" duration="61000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1591877355890">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591877355890" />
+    <state width="664" height="240" key="GridCell.Tab.0.bottom" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.0.center" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.0.left" timestamp="1593421059320">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593421059320" />
+    <state width="664" height="240" key="GridCell.Tab.0.right" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.1.bottom" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.1.center" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.1.left" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.1.right" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.2.bottom" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.2.center" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.2.left" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.2.right" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.3.bottom" timestamp="1593421059322">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593421059322" />
+    <state width="664" height="240" key="GridCell.Tab.3.center" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.3.left" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state width="664" height="240" key="GridCell.Tab.3.right" timestamp="1593421059321">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="664" height="240" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1593421059321" />
+    <state x="370" y="119" width="626" height="490" key="find.popup" timestamp="1593315146077">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="370" y="119" width="626" height="490" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1593315146077" />
+    <state x="339" y="157" key="run.anything.popup" timestamp="1590404144170">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="157" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1590404144170" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1590498510185">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590498510185" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/vue-vant-app/src/main.js</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
