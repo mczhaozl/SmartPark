@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.jeecg.modules.meeting.mapper.JsMeetingMapper">
+	<!--我参与的会议 -->
+	<select id="myAttendMeeting"
+		resultType="org.jeecg.modules.meeting.entity.JsMeeting">
+		select *
+		from js_meeting jm
+		left join js_meeting_user jmu on jm.id = jmu.meeting_id
+		where jmu.user_id = #{userId}
+		<if test="room != null">
+			and jm.room_name = #{room}
+		</if>
+		<if test="status != null">
+			and jm.status in
+			<foreach item="item" collection="status" index="index"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+</mapper>
