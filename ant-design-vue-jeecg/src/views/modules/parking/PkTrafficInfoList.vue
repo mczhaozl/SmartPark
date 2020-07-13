@@ -143,12 +143,13 @@
           {
             title:'阅读量',
             align:"center",
-            dataIndex: 'count'
-          },
-          {
-            title:'备注',
-            align:"center",
-            dataIndex: 'remarks'
+            dataIndex: 'count',
+            customRender:function (t,r,index) {
+              if(t == null){
+                return 0;
+              }
+              return t;
+            }
           },
           {
             title: '操作',

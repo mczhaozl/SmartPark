@@ -18,18 +18,14 @@
           <a-input v-decorator="['author']" placeholder="请输入作者"></a-input>
         </a-form-item>
         <a-form-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['type']" placeholder="请输入类型"></a-input>
+          <j-dict-select-tag v-decorator="['type']" triggerChange dictCode="zx_type" placeholder="请选择类型"/>
         </a-form-item>
         <a-form-item label="缩略图" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['thumbnail']" placeholder="请输入缩略图"></a-input>
+          <j-image-upload v-decorator="['thumbnail']"></j-image-upload>
         </a-form-item>
 
         <a-form-item label="内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <tinymce-editor ref="editor"
-                          v-decorator="['content']"
-                          @onClick="onClickEditor">
-          </tinymce-editor>
-         <!-- <a-input v-decorator="['content']" placeholder="请输入内容"></a-input>-->
+          <j-editor v-model="content"/>
         </a-form-item>
         <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['remarks']" placeholder="请输入备注"></a-input>
@@ -45,13 +41,15 @@
   import { httpAction } from '@/api/manage'
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
-  import TinymceEditor from '@/components/editor/TinymceEditor'
+  import JEditor from '@/components/jeecg/JEditor'
+  import JImageUpload from '@/components/jeecg/JImageUpload'
 
 
   export default {
     name: "PkTrafficInfoModal",
     components: {
-      TinymceEditor
+      JEditor,
+      JImageUpload
     },
     data () {
       return {
@@ -59,7 +57,9 @@
         title:"操作",
         width:800,
         visible: false,
+        type:'',
         model: {},
+        content:'',
         labelCol: {
           xs: { span: 24 },
           sm: { span: 5 },

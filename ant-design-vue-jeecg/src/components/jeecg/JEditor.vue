@@ -12,6 +12,7 @@
 <script>
   import tinymce from 'tinymce/tinymce'
   import Editor from '@tinymce/tinymce-vue'
+  import 'tinymce/icons/default'
   import 'tinymce/themes/silver/theme'
   import 'tinymce/plugins/image'
   import 'tinymce/plugins/link'
