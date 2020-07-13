@@ -133,13 +133,14 @@
           {
             title:'缩略图',
             align:"center",
-            dataIndex: 'thumbnail'
+            dataIndex: 'thumbnail',
+            scopedSlots: {customRender: "imgSlot"}
           },
-          {
+          /*{
             title:'内容',
             align:"center",
             dataIndex: 'content'
-          },
+          },*/
           {
             title:'阅读量',
             align:"center",
@@ -150,11 +151,6 @@
               }
               return t;
             }
-          },
-          {
-            title:'备注',
-            align:"center",
-            dataIndex: 'remarks'
           },
           {
             title: '操作',

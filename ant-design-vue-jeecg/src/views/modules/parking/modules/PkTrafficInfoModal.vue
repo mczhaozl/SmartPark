@@ -12,16 +12,16 @@
       <a-form :form="form">
 
         <a-form-item label="标题" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['title']" placeholder="请输入标题"></a-input>
+          <a-input v-decorator="['title',validatorRules.title]" placeholder="请输入标题"></a-input>
         </a-form-item>
         <a-form-item label="作者" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['author']" placeholder="请输入作者"></a-input>
+          <a-input v-decorator="['author',validatorRules.author]" placeholder="请输入作者"></a-input>
         </a-form-item>
         <a-form-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-dict-select-tag v-decorator="['type']" triggerChange dictCode="zx_type" placeholder="请选择类型"/>
+          <j-dict-select-tag v-decorator="['type',validatorRules.type]" triggerChange dictCode="zx_type" placeholder="请选择类型"/>
         </a-form-item>
         <a-form-item label="缩略图" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-image-upload v-decorator="['thumbnail']"></j-image-upload>
+          <j-image-upload v-decorator="['thumbnail',validatorRules.thumbnail]"></j-image-upload>
         </a-form-item>
 
         <a-form-item label="内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -74,6 +74,20 @@
         url: {
           add: "/parking/pkTrafficInfo/add",
           edit: "/parking/pkTrafficInfo/edit",
+        },
+        validatorRules: {
+          title: {
+            rules: [{ required: true, message: '请输入标题'}]
+          },
+          author: {
+            rules: [{ required: true, message: '请输入作者'}]
+          },
+          type: {
+            rules: [{ required: true, message: '请选择类型'}]
+          },
+          thumbnail: {
+            rules: [{ required: true, message: '请上传缩略图'}]
+          }
         }
       }
     },
@@ -86,6 +100,7 @@
       edit (record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
+        this.content = this.model.content;
         this.visible = true;
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,'title','author','type','thumbnail','content','count','remarks'))
@@ -110,6 +125,7 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
+            this.model.content = this.content;
             let formData = Object.assign(this.model, values);
             console.log("表单提交数据",formData)
             httpAction(httpurl,formData,method).then((res)=>{
