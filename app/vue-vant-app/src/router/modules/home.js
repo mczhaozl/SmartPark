@@ -19,16 +19,11 @@ const index = {
         component: () => import("@/views/Home/index/index"),
         name: "HomeIndex",
         meta: { title: "首页", icon: "" }
-    }, {
-        path: "icons",
-        component: () => import("@/views/Home/icons/index"),
-        name: "HomeIcons",
-        meta: { title: "SVG图标", icon: "" }
-    }, {
-        path: "test",
-        component: () => import("@/views/Home/test/index"),
-        name: "HomeTest",
-        meta: { title: "技术准备页面", icon: "" }
+    },{
+        path: "detail",
+        component: () => import("@/views/Home/detail/index"),
+        name: "HomeDeatil",
+        meta: { title: "详情", icon: "" }
     }]
 };
 

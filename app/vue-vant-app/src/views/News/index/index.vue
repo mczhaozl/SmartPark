@@ -14,71 +14,57 @@
                         </van-swipe-item>
                     </van-swipe>
                     <div style="background-color: #ffffff; line-height: 20px;padding-top: 10px; overflow-y:auto;">
-                        <van-list
-                                v-model="loading"
-                                :finished="finished"
-                                finished-text="没有更多了"
-                                @load="onLoad"
-                        >
-                            <van-row>
-                                <van-col span="20">【交通管制】2020年3月22日起至2021年5月26日高新区部分道路交通管制</van-col>
-                                <van-col span="4"><img height="40px" src="~@/assets/images/news-1.png"/></van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="20">【交通资讯】注意！7月起实施非机动车新规，这类行为将扣车+罚款！</van-col>
-                                <van-col span="4"><img height="40px" src="~@/assets/images/news-1.png"/></van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="20">【交通资讯】彰显省会担当 加快赶超步伐 决战决胜攻坚——南昌市交通运输迎“国评”动员部署会召开</van-col>
-                                <van-col span="4"><img height="40px" src="~@/assets/images/news-1.png"/></van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="20">【交通资讯】彰显省会担当 加快赶超步伐 决战决胜攻坚——南昌市交通运输迎“国评”动员部署会召开</van-col>
-                                <van-col span="4"><img height="40px" src="~@/assets/images/news-1.png"/></van-col>
-                            </van-row>
-                        </van-list>
+                        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+                            <van-list
+                                    v-if="!isEmpty"
+                                    v-model="loading"
+                                    :finished="finished"
+                                    finished-text="没有更多了"
+                                    @load="onLoad"
+                            >
+                                <template #pulling="props">
+                                    <img
+                                            class="doge"
+                                            src="https://img.yzcdn.cn/vant/doge.png"
+                                            :style="{ transform: `scale(${props.distance / 80})` }"
+                                    />
+                                </template>
+                                <!-- 释放提示 -->
+                                <template #loosing>
+                                    <img class="doge" src="https://img.yzcdn.cn/vant/doge.png"/>
+                                </template>
+                                <div v-for="(item,index) in trafficList" :key="index" @click="onClickTraffic(item)">
+                                    <van-row>
+                                        <van-col span="18">【{{item.type}}】{{item.title}}</van-col>
+                                        <van-col span="6"><img style="height: 55px;width: 100%"
+                                                               :src="getAvatarView(item.thumbnail)"/></van-col>
+                                    </van-row>
+                                    <van-divider style="  margin-top:5px !important; margin-bottom:5px !important;"/>
+                                </div>
+                            </van-list>
+                            <van-empty v-else description="暂无" style="background-color: #ffffff"/>
+                        </van-pull-refresh>
                     </div>
                 </van-tab>
                 <van-tab title="出行提示">
                     <div style="background-color: #ffffff;line-height: 20px;padding-top: 10px;">
-                        <van-list
-                                v-model="loading"
-                                :finished="finished"
-                                finished-text="没有更多了"
-                                @load="onLoad"
-                        >
-                            <van-row>
-                                <van-col span="24">【出行提示】骑电动车要戴头盔？交警解答来了</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【出行提示】开学啦！近期交通出行提示：早晚高峰将提前！时段将延长！</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【必看】今日（5月21日）出行重要提示&明日（5月22日）交通预报</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【出行提示】一周交通出行提示</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【出行提示】南昌周边景区交通出行提示</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【出行提示】出行提醒！明天上午高新部分多路段将分时交通管控</van-col>
-                            </van-row>
-                            <van-divider/>
-                            <van-row>
-                                <van-col span="24">【出行提示】南昌交警发布5月25日出行提示，机动车不限号</van-col>
-                            </van-row>
-                            <van-divider/>
-                        </van-list>
+                        <van-pull-refresh v-model="tRefreshing" @refresh="ontRefresh">
+                            <van-list
+                                    v-if="!isTEmpty"
+                                    v-model="tloading"
+                                    :finished="tfinished"
+                                    finished-text="没有更多了"
+                                    @load="ontLoad"
+                            >
+                                <div v-for="(item,index) in travelList" :key="index" @click="onClickTravel(item)">
+                                    <van-row>
+                                        <van-col span="24">【{{item.type}}】{{item.title}}</van-col>
+                                    </van-row>
+                                    <van-divider/>
+                                </div>
+                            </van-list>
+                            <van-empty v-else description="暂无" style="background-color: #ffffff"/>
+                        </van-pull-refresh>
                     </div>
                 </van-tab>
             </van-tabs>
@@ -88,84 +74,202 @@
 </template>
 
 <script>
-    import Vue from "vue";
-    import {PullRefresh, Tab, Tabs, NavBar, Divider} from 'vant';
-    import {Lazyload} from 'vant';
+    import Vue from 'vue';
+    import {getAction, getFileAccessHttpUrl} from '@/api/manage';
+    import {Grid, GridItem, List} from 'vant';
+    import {PullRefresh, Empty} from 'vant';
+    import {Tab, Tabs} from 'vant';
     import {Swipe, SwipeItem} from 'vant';
-    import {List} from 'vant';
+    import {Divider} from 'vant';
+    import {NavBar} from 'vant';
+    import {Col, Row} from 'vant';
+    import {Lazyload} from 'vant';
     import banner from '@/assets/images/banner.png'
 
     Vue.use(List);
     Vue.use(Lazyload);
+    Vue.use(Col);
+    Vue.use(Row);
+    Vue.use(NavBar);
     Vue.use(Divider);
-    Vue.use(Tab);
-    Vue.use(Tabs);
     Vue.use(Swipe);
     Vue.use(SwipeItem);
-    Vue.use(NavBar);
+    Vue.use(Tab);
+    Vue.use(Tabs);
+    Vue.use(Empty);
     Vue.use(PullRefresh);
+    Vue.use(Grid);
+    Vue.use(GridItem);
     export default {
-        name: "Template",
+        name: "Index",
         data() {
             return {
-                show: false,
-                src: '',
+                isEmpty: false,
+                pageNo: 1,
+                pageSize: 5,
+                refreshing: false,
                 active: '',
-                list: [],
+                trafficList: [],
                 loading: false,
                 finished: false,
-                index: 0,
-                imgList: [],
+                isTEmpty: false,
+                pageTNo: 1,
+                pageTSize: 5,
+                tRefreshing: false,
+                travelList: [],
+                tloading: false,
+                tfinished: false,
+                activeNames: ['1'],
                 images: [
                     banner,
                     banner,
                 ]
             };
         },
-        components: {
-            // pageHeader: () => import("@/components/pageHeader/index"),
-            pageFooter: () => import("@/components/pageFooter/index"),
-            // mainContainer: () => import("@/components/mainContainer/default"),
-            // mainContainer: () => import("@/components/mainContainer/refresh"),
-            // mainContainer: () => import("@/components/mainContainer/refreshReload"),
-        },
         computed: {},
+        components: {
+            pageFooter: () => import("@/components/pageFooter/index"),
+        },
         created() {
         },
         mounted() {
-            let vm = this;
-            vm.init()
+
         },
         methods: {
-            /**
-             * 获取数据
-             */
-            init() {
-
+            getAvatarView: function (avatar) {
+                return getFileAccessHttpUrl(avatar)
             },
             onLoad() {
-                console.log('load')
+                let that = this
+                getAction(window._CONFIG['domianURL'] + '/parking/pkTrafficInfo/list', {
+                        'pageNo': that.pageNo,
+                        'pageSize': that.pageSize
+                    }
+                ).then(data => {
+                    // 加载状态结束
+                    that.loading = false;
+                    if (data.result.records != null && data.result.records.length > 0) {
+                        for (let i in data.result.records) {
+                            that.trafficList.push(data.result.records[i])
+                        }
+                        that.pageNo++
+                    } else {
+                        that.finished = true
+                        if (that.pageNo == 1) {
+                            that.isEmpty = true
+                        }
+                    }
+                })
 
             },
-            onChange(index) {
-                this.index = index;
+            onClickTraffic(item){
+                this.$router.push({
+                    name: 'HomeDeatil',
+                    params: {
+                        item: item
+                    }
+                })
+            },
+            ontLoad() {
+                let that = this
+                getAction(window._CONFIG['domianURL'] + '/parking/pkTravelTip/list', {
+                        'pageNo': that.pageTNo,
+                        'pageSize': that.pageTSize
+                    }
+                ).then(data => {
+                    // 加载状态结束
+                    that.tloading = false;
+                    if (data.result.records != null && data.result.records.length > 0) {
+                        for (let i in data.result.records) {
+                            that.travelList.push(data.result.records[i])
+                        }
+                        that.pageTNo++
+                    } else {
+                        that.tfinished = true
+                        if (that.pageTNo == 1) {
+                            that.isTEmpty = true
+                        }
+                    }
+                })
+            },
+            onClickTravel(item){
+                this.$router.push({
+                    name: 'HomeDeatil',
+                    params: {
+                        item: item
+                    }
+                })
+            },
+            onRefresh() {
+                // 清空列表数据
+                this.finished = false
+                // 重新加载数据
+                // 将 loading 设置为 true，表示处于加载状态
+                this.isEmpty = false
+                this.loading = true
+                this.trafficList = []
+                this.refreshing = false
+                this.pageNo = 1
+                this.onLoad()
+            },
+            ontRefresh() {
+                // 清空列表数据
+                this.tfinished = false
+                // 重新加载数据
+                // 将 loading 设置为 true，表示处于加载状态
+                this.isTEmpty = false
+                this.tloading = true
+                this.travelList = []
+                this.tRefreshing = false
+                this.pageTNo = 1
+                this.ontLoad()
             }
         }
     };
 </script>
+<style lang="scss" scoped>
+    .my-swipe .van-swipe-item {
+        color: #fff;
+        font-size: 20px;
+        line-height: 150px;
+        text-align: center;
+        background-color: #39a9ed;
+    }
 
-<style lang="scss">
-    .van-nav-bar__title {
+    .center {
+        flex: 1;
+        text-align: center;
+        margin-top: 25px;
         color: #ffffff;
         font-weight: bold;
+        font-size: $default;
     }
 
-    /deep/ .van-image-preview__image {
-        border: 1px solid #f00 !important;
+    .nav {
+        background-color: #005aa9 !important;
     }
 
-    /deep/ .van-image-preview__image img {
-        border: 1px solid #f00;
-        height: 100px;
+    /deep/ .van-nav-bar__title {
+        color: #ffffff !important;
+        font-weight: bold !important;
     }
+
+    .van-card:not(:first-child) {
+        margin-top: 0;
+    }
+
+    .van-card.van-tabs > .van-tabs__wrap > .van-tabs__nav > .van-tabs__line > .van-tab--active {
+        color: #5eb95e !important;
+    }
+
+    /*   /deep/ .van-grid {
+           background: url("/assets/images/bg.png") no-repeat;
+           background-size: 100% 100%;
+       }*/
+
+    // 去除自带边框
+    /deep/ .van-hairline--top-bottom::after {
+        border: 0;
+    }
+
 </style>

@@ -20,9 +20,9 @@
         <a-form-item label="作者" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['author']" placeholder="请输入作者"></a-input>
         </a-form-item>
-        <a-form-item label="缩略图" :labelCol="labelCol" :wrapperCol="wrapperCol">
+      <!--  <a-form-item label="缩略图" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-image-upload v-decorator="['thumbnail']"></j-image-upload>
-        </a-form-item>
+        </a-form-item>-->
         <a-form-item label="内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-editor v-model="content"/>
         </a-form-item>

@@ -3,6 +3,7 @@ import axios from "axios";
 import $router from "../router/index";
 import layer from "@/utils/layer";
 import { Toast } from "vant";
+import { VueAxios } from './axios'
 import * as util from "@/utils/utils";
 import store from '../store'
 
@@ -32,18 +33,17 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         let res = response.data;
-
         if (res.code === 0 || res.code === '000' || res.code === "1" || parseInt(res.current) == 0) {
             // console.log(res, '9999')
-            // 处理无意义数据，null undefined 为 空串
+            // 处理无意义数据，null undefined 为 空
             res = util.toEmptyStr(res)
             return res;
         } else if (parseInt(res.code) === 402) {
-            layer.toast(res.msg);
+            layer.toast(res.message);
             $router.push("/");
         } else {
-            layer.toast(res.msg || res.message || '网络异常，请稍后重试！');
-            return Promise.reject(res); // 请求code返回-1当错误处理
+            //layer.toast(res.msg || res.message || '网络异常，请稍后重试！');
+            return res; // 请求code返回-1当错误处理
         }
     },
     err => {
@@ -116,5 +116,16 @@ export default function(
             .finally(() => {
                 if (loading) loadingInstance.clear();
             });
-    });
+    }).catch((e) => {});
+}
+
+const installer = {
+    vm: {},
+    install (Vue, router = {}) {
+        Vue.use(VueAxios, router, service)
+    }
+}
+export {
+    installer as VueAxios,
+    service as axios
 }
