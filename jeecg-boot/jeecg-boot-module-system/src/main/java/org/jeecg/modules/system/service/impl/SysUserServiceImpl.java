@@ -264,7 +264,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		List<SysUserSysDepartModel> list = baseMapper.getUserByOrgCode(page, orgCode, userParams);
 		Integer total = baseMapper.getUserByOrgCodeTotal(orgCode, userParams);
 
-		IPage<SysUserSysDepartModel> result = new Page<>(page.getCurrent(), page.getSize(), total);
+		IPage<SysUserSysDepartModel> result = new Page<SysUserSysDepartModel>(page.getCurrent(), page.getSize(), total);
 		result.setRecords(list);
 
 		return result;

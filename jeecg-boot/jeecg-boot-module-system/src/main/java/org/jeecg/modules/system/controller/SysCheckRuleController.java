@@ -57,7 +57,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
             HttpServletRequest request
     ) {
         QueryWrapper<SysCheckRule> queryWrapper = QueryGenerator.initQueryWrapper(sysCheckRule, request.getParameterMap());
-        Page<SysCheckRule> page = new Page<>(pageNo, pageSize);
+        Page<SysCheckRule> page = new Page<SysCheckRule>(pageNo, pageSize);
         IPage<SysCheckRule> pageList = sysCheckRuleService.page(page, queryWrapper);
         return Result.ok(pageList);
     }
