@@ -80,10 +80,17 @@
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         class="j-table-force-nowrap"
         @change="handleTableChange">
-
+      
         <template slot="htmlSlot" slot-scope="text">
           <div v-html="text"></div>
         </template>
+
+         <template slot="Imageslot" slot-scope="text, record">
+          <div class="anty-img-wrap">
+            <a-avatar shape="square" :src="getImagesView(record.images)" icon="user"/>
+          </div>
+          </template>
+
         <template slot="imgSlot" slot-scope="text">
           <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
@@ -130,6 +137,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import PkParkingLotModal from './modules/PkParkingLotModal'
+  import {putAction,getFileAccessHttpUrl} from '@/api/manage';
 
   export default {
     name: "PkParkingLotList",
@@ -205,7 +213,8 @@
           {
             title:'图片',
             align:"center",
-            dataIndex: 'images'
+            dataIndex: 'images',
+            scopedSlots: {customRender: "Imageslot"}
           },
           {
             title:'支付码',
@@ -248,7 +257,10 @@
     },
     methods: {
       initDictConfig(){
-      }
+      },
+       getImagesView: function (avatar) {
+        return getFileAccessHttpUrl(avatar)
+      },
     }
   }
 </script>

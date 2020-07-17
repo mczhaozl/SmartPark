@@ -24,7 +24,7 @@
           <a-input v-decorator="['userId']" placeholder="请输入用户Id"></a-input>
         </a-form-item> -->
         <a-form-item label="用户名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-select-user-by-dep placeholder="请选择用户" :multi="false" :multiple="false" v-decorator="['userId', {}]"/>
+          <j-select-user-by-dep placeholder="请选择用户" :multi="false" :multiple="false" v-decorator="['username', {}]"/>
         </a-form-item>
         <a-form-item label="发动机号" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['motor']" placeholder="请输入发动机号"></a-input>
@@ -90,6 +90,7 @@
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
+
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,'carNumber','type','carColor','userId','username','motor','remarks'))
         })

@@ -93,12 +93,11 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import PkAppointmentModal from './modules/PkAppointmentModal'
-
   export default {
     name: "PkAppointmentList",
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      PkAppointmentModal
+      PkAppointmentModal,
     },
     data () {
       return {

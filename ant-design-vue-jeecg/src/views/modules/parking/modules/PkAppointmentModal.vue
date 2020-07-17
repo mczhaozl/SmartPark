@@ -15,10 +15,12 @@
           <a-input v-decorator="['carNumber']" placeholder="请输入预约车牌号"></a-input>
         </a-form-item>
         <a-form-item label="开始时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['startTime']" placeholder="请输入开始时间"></a-input>
+          <!-- <a-input v-decorator="['startTime']" placeholder="请输入开始时间"></a-input> -->
+          <j-date  v-decorator="['startTime']" placeholder="请输入开始时间" :showTime="true" dateFormat="YYYY-MM-DD HH:mm:ss"/>
         </a-form-item>
         <a-form-item label="结束时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['endTime']" placeholder="请输入结束时间"></a-input>
+          <!-- <a-input v-decorator="['endTime']" placeholder="请输入结束时间"></a-input> -->
+          <j-date  v-decorator="['endTime']" placeholder="请输入结束时间" :showTime="true" dateFormat="YYYY-MM-DD HH:mm:ss"/>
         </a-form-item>
         <a-form-item label="停车场ID" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['lotId']" placeholder="请输入停车场ID"></a-input>
@@ -55,11 +57,13 @@
   import { httpAction } from '@/api/manage'
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
+  import JDate from '@/components/jeecg/JDate'
 
 
   export default {
     name: "PkAppointmentModal",
     components: { 
+      JDate
     },
     data () {
       return {
