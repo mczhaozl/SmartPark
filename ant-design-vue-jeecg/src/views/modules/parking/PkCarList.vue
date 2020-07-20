@@ -164,7 +164,9 @@
           {
             title:'车辆类型',
             align:"center",
-            dataIndex: 'type'
+            dataIndex: 'type_dictText'
+         
+            
           },
           {
             title:'车辆颜色',

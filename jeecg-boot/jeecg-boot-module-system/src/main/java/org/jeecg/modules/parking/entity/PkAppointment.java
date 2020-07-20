@@ -85,6 +85,7 @@ public class PkAppointment implements Serializable {
 	/**是否支付*/
 	@Excel(name = "是否支付", width = 15)
     @ApiModelProperty(value = "是否支付")
+	@Dict(dicCode = "appo_isPay")
     private java.lang.String isPay;
 	/**订单号*/
 	@Excel(name = "订单号", width = 15)
@@ -93,6 +94,7 @@ public class PkAppointment implements Serializable {
 	/**状态，已预约，已取消*/
 	@Excel(name = "状态，已预约，已取消", width = 15)
     @ApiModelProperty(value = "状态，已预约，已取消")
+	@Dict(dicCode = "appo_status")
     private java.lang.String status;
 	/**状态*/
 	@Excel(name = "状态", width = 15)

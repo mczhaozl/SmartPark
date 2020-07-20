@@ -193,7 +193,7 @@
           {
             title:'类型',
             align:"center",
-            dataIndex: 'type'
+            dataIndex: 'type_dictText'
           },
           {
             title:'经度',

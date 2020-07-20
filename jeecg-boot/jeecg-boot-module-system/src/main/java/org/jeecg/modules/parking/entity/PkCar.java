@@ -61,6 +61,7 @@ public class PkCar implements Serializable {
 	/**车辆类型，新能源*/
 	@Excel(name = "车辆类型，新能源", width = 15)
     @ApiModelProperty(value = "车辆类型，新能源")
+	@Dict(dicCode = "car_type")
     private java.lang.String type;
 	/**车辆颜色*/
 	@Excel(name = "车辆颜色", width = 15)

@@ -142,7 +142,7 @@
           {
             title:'是否支付',
             align:"center",
-            dataIndex: 'isPay'
+            dataIndex: 'isPay_dictText'
           },
           {
             title:'订单号',
@@ -152,7 +152,7 @@
           {
             title:'状态',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'status_dictText'
           },
           {
             title: '操作',

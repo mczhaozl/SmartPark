@@ -80,7 +80,7 @@ public class PkParkingLot implements Serializable {
     private java.lang.String payTags;
 	/**类型，室内，室外，公园，道路*/
 	@Excel(name = "类型，室内，室外，公园，道路", width = 15)
-    @ApiModelProperty(value = "类型，室内，室外，公园，道路")
+	@Dict(dicCode = "parking_lot_type")
     private java.lang.String type;
 	/**经度*/
 	@Excel(name = "经度", width = 15)
