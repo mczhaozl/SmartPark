@@ -78,7 +78,7 @@
           this.userNames = temp.substring(1)
           this.userIds = idstr
         }
-        this.$emit("change", this.userIds)
+        this.$emit("change", this.userIds,this.userNames)
       }
     }
   }

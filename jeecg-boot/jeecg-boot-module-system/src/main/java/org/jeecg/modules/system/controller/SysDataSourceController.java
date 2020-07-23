@@ -58,7 +58,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
             HttpServletRequest req
     ) {
         QueryWrapper<SysDataSource> queryWrapper = QueryGenerator.initQueryWrapper(sysDataSource, req.getParameterMap());
-        Page<SysDataSource> page = new Page<>(pageNo, pageSize);
+        Page<SysDataSource> page = new Page<SysDataSource>(pageNo, pageSize);
         IPage<SysDataSource> pageList = sysDataSourceService.page(page, queryWrapper);
         return Result.ok(pageList);
     }

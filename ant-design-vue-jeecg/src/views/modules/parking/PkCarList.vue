@@ -10,8 +10,10 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="车辆类型，新能源">
-              <a-input placeholder="请输入车辆类型，新能源" v-model="queryParam.type"></a-input>
+            <a-form-item label="车辆类型">
+              <!-- <a-input placeholder="请输入车辆类型，新能源" v-model="queryParam.type"></a-input> -->
+              <j-dict-select-tag placeholder="请选择车辆类型"  dictCode="car_type" v-model="queryParam.type" />
+              
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
@@ -130,12 +132,14 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import PkCarModal from './modules/PkCarModal'
+  import JDictSelectTag from '@/components/dict/JDictSelectTag'
 
   export default {
     name: "PkCarList",
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      PkCarModal
+      PkCarModal,
+      JDictSelectTag
     },
     data () {
       return {
@@ -160,7 +164,9 @@
           {
             title:'车辆类型',
             align:"center",
-            dataIndex: 'type'
+            dataIndex: 'type_dictText'
+         
+            
           },
           {
             title:'车辆颜色',

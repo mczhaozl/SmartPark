@@ -54,7 +54,7 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
                                    @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
                                    HttpServletRequest req) {
         QueryWrapper<SysFillRule> queryWrapper = QueryGenerator.initQueryWrapper(sysFillRule, req.getParameterMap());
-        Page<SysFillRule> page = new Page<>(pageNo, pageSize);
+        Page<SysFillRule> page = new Page<SysFillRule>(pageNo, pageSize);
         IPage<SysFillRule> pageList = sysFillRuleService.page(page, queryWrapper);
         return Result.ok(pageList);
     }

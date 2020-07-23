@@ -36,7 +36,7 @@ public class OSSFileController {
 			@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest req) {
 		Result<IPage<OSSFile>> result = new Result<>();
 		QueryWrapper<OSSFile> queryWrapper = QueryGenerator.initQueryWrapper(file, req.getParameterMap());
-		Page<OSSFile> page = new Page<>(pageNo, pageSize);
+		Page<OSSFile> page = new Page<OSSFile>(pageNo, pageSize);
 		IPage<OSSFile> pageList = ossFileService.page(page, queryWrapper);
 		result.setSuccess(true);
 		result.setResult(pageList);

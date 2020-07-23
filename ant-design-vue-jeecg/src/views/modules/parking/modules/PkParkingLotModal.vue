@@ -24,13 +24,15 @@
           <a-input v-decorator="['tips']" placeholder="请输入提示"></a-input>
         </a-form-item>
         <a-form-item label="提示标签" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['tipTags']" placeholder="请输入提示标签"></a-input>
+          <!-- <a-input v-decorator="['tipTags']" placeholder="请输入提示标签"></a-input> -->
+          <j-checkbox  :options="tipTagData.options" v-decorator="['tipTags', {}]"/>
         </a-form-item>
         <a-form-item label="支付标签" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['payTags']" placeholder="请输入支付标签"></a-input>
+          <!-- <a-input v-decorator="['payTags']" placeholder="请输入支付标签"></a-input> -->
+           <j-checkbox  :options="payTagData.options" v-decorator="['payTags', {}]"/>
         </a-form-item>
-        <a-form-item label="类型，室内，室外，公园，道路" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['type']" placeholder="请输入类型，室内，室外，公园，道路"></a-input>
+        <a-form-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
+           <j-dict-select-tag placeholder="请选择停车场类型" :triggerChange="true" dictCode="parking_lot_type" v-decorator="['type']"/>
         </a-form-item>
         <a-form-item label="经度" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input-number v-decorator="['longitude']" placeholder="请输入经度" style="width: 100%"/>
@@ -42,7 +44,8 @@
           <a-input v-decorator="['score']" placeholder="请输入评分"></a-input>
         </a-form-item>
         <a-form-item label="图片" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['images']" placeholder="请输入图片"></a-input>
+          <!-- <a-input v-decorator="['images']" placeholder="请输入图片"></a-input> -->
+           <j-image-upload v-model="fileList"></j-image-upload>
         </a-form-item>
         <a-form-item label="支付码" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['payCode']" placeholder="请输入支付码"></a-input>
@@ -76,11 +79,15 @@
   import { httpAction } from '@/api/manage'
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
+  import JCheckbox from '@/components/jeecg/JCheckbox'
+  import JImageUpload from '@/components/jeecg/JImageUpload'
 
 
   export default {
     name: "PkParkingLotModal",
     components: { 
+      JCheckbox,
+      JImageUpload
     },
     data () {
       return {
@@ -103,9 +110,29 @@
         url: {
           add: "/parking/pkParkingLot/add",
           edit: "/parking/pkParkingLot/edit",
-        }
+        },
+        tipTagData: {
+          values: '',
+          options: [
+            { label: '地铁口', value: '地铁口' },
+            { label: '距离近', value: '距离近' },
+            { label: '可预约', value: '可预约' }
+           
+          ]
+        },
+        payTagData: {
+          values: '',
+          options: [
+            { label: '在线支付', value: '在线支付' },
+            { label: '现金', value: '现金' },
+            { label: '刷卡', value: '刷卡' }
+           
+          ]
+        },
+        fileList:[],
       }
     },
+ 
     created () {
     },
     methods: {
@@ -116,6 +143,9 @@
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
+        setTimeout(() => {
+          this.fileList = record.images;
+        }, 5)
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,'name','totalLot','freeLot','tips','tipTags','payTags','type','longitude','latitude','score','images','payCode','address','ext1','ext2','ext3','ext4','remarks'))
         })
@@ -138,6 +168,11 @@
             }else{
               httpurl+=this.url.edit;
                method = 'put';
+            }
+            if(that.fileList != ''){
+              this.model.images = that.fileList;
+            }else{
+              this.model.images = null;
             }
             let formData = Object.assign(this.model, values);
             console.log("表单提交数据",formData)

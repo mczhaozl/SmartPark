@@ -93,12 +93,11 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import PkAppointmentModal from './modules/PkAppointmentModal'
-
   export default {
     name: "PkAppointmentList",
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      PkAppointmentModal
+      PkAppointmentModal,
     },
     data () {
       return {
@@ -143,7 +142,7 @@
           {
             title:'是否支付',
             align:"center",
-            dataIndex: 'isPay'
+            dataIndex: 'isPay_dictText'
           },
           {
             title:'订单号',
@@ -153,7 +152,7 @@
           {
             title:'状态',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'status_dictText'
           },
           {
             title: '操作',

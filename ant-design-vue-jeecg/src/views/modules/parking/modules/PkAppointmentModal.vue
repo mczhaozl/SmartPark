@@ -15,10 +15,12 @@
           <a-input v-decorator="['carNumber']" placeholder="请输入预约车牌号"></a-input>
         </a-form-item>
         <a-form-item label="开始时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['startTime']" placeholder="请输入开始时间"></a-input>
+          <!-- <a-input v-decorator="['startTime']" placeholder="请输入开始时间"></a-input> -->
+          <j-date  v-decorator="['startTime']" placeholder="请输入开始时间" :showTime="true" dateFormat="YYYY-MM-DD HH:mm:ss"/>
         </a-form-item>
         <a-form-item label="结束时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['endTime']" placeholder="请输入结束时间"></a-input>
+          <!-- <a-input v-decorator="['endTime']" placeholder="请输入结束时间"></a-input> -->
+          <j-date  v-decorator="['endTime']" placeholder="请输入结束时间" :showTime="true" dateFormat="YYYY-MM-DD HH:mm:ss"/>
         </a-form-item>
         <a-form-item label="停车场ID" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['lotId']" placeholder="请输入停车场ID"></a-input>
@@ -26,20 +28,28 @@
         <a-form-item label="停车场" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['lotName']" placeholder="请输入停车场"></a-input>
         </a-form-item>
-        <a-form-item label="预约人ID" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <!-- <a-form-item label="预约人ID" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['userId']" placeholder="请输入预约人ID"></a-input>
         </a-form-item>
         <a-form-item label="预约人" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['username']" placeholder="请输入预约人"></a-input>
+        </a-form-item> -->
+        <a-form-item label="预约人" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-select-user-by-dep placeholder="请选择预约人" :multi="false" :multiple="false" v-decorator="['username', {}]"/>
         </a-form-item>
-        <a-form-item label="是否支付" :labelCol="labelCol" :wrapperCol="wrapperCol">
+
+        <!-- <a-form-item label="是否支付" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['isPay']" placeholder="请输入是否支付"></a-input>
+        </a-form-item> -->
+        <a-form-item label="是否支付" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-dict-select-tag  v-decorator="['isPay']" placeholder="请选择是否支付" :type="'radio'" :triggerChange="true" dictCode="appo_isPay"/>
         </a-form-item>
+
         <a-form-item label="订单号" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['orderId']" placeholder="请输入订单号"></a-input>
         </a-form-item>
-        <a-form-item label="状态，已预约，已取消" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="['status']" placeholder="请输入状态，已预约，已取消"></a-input>
+        <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-dict-select-tag  v-decorator="['status']"  :type="'radio'" :triggerChange="true" dictCode="appo_status"/>
         </a-form-item>
         <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="['remarks']" placeholder="请输入状态"></a-input>
@@ -55,11 +65,15 @@
   import { httpAction } from '@/api/manage'
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
+  import JDate from '@/components/jeecg/JDate'
+  import JSelectUserByDep from '@/components/jeecgbiz/JSelectUserByDep'
 
 
   export default {
     name: "PkAppointmentModal",
     components: { 
+      JDate,
+      JSelectUserByDep
     },
     data () {
       return {
@@ -89,7 +103,7 @@
     },
     methods: {
       add () {
-        this.edit({});
+        this.edit({isPay:'1',status:'1'});
       },
       edit (record) {
         this.form.resetFields();
