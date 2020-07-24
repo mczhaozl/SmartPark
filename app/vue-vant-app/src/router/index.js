@@ -10,7 +10,6 @@ import Parkinglot from "./modules/parkinglot"; // 找车位
 import Appointment from "./modules/appointment"; // 预约停车
 import Roadside from "./modules/roadside"; // 预约停车
 import Pay from "./modules/pay"; // 停车缴费
-
 let staticRoutes = [
     Home,
     Me,

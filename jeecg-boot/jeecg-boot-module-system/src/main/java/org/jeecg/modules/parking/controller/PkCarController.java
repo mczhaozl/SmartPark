@@ -15,6 +15,7 @@ import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.parking.entity.PkCar;
 import org.jeecg.modules.parking.service.IPkCarService;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

@@ -43,7 +43,7 @@
   Vue.use(Tabbar);
   Vue.use(TabbarItem);
 export default {
-  name: "PageHeader",
+  name: "PageFooter",
   data() {
     return {
       active: 0,

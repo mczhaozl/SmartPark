@@ -13,14 +13,14 @@
                                height="2rem" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
                 </van-col>
                 <van-col span="20" style="padding-left: 1rem;padding-top: 0.3rem">
-                    <van-row style="font-size:0.5rem;font-weight: bold;color: #646566">张三</van-row>
-                    <van-row style="margin-top: 15px">15870637236</van-row>
+                    <van-row style="font-size:0.5rem;font-weight: bold;color: #646566" @click="login">{{userInfo.userName}}</van-row>
+                    <van-row style="margin-top: 15px">{{userInfo.phone}}</van-row>
                 </van-col>
             </van-row>
         </div>
         <div class="van-card">
             <van-grid :border="false">
-                <van-grid-item :icon="icon.car" text="我的车辆" />
+                <van-grid-item :icon="icon.car" text="我的车辆" to="/login" />
                 <van-grid-item :icon="icon.appointment" text="我的预约"/>
                 <van-grid-item :icon="icon.wallet" text="我的钱包"/>
                 <van-grid-item :icon="icon.record" text="停车记录"/>
@@ -48,9 +48,11 @@
     import appointment from '@/assets/images/my-appointment.png'
     import wallet from '@/assets/images/my-wallet.png'
     import record from '@/assets/images/my-record.png'
+    import {Lazyload} from 'vant';
 
     Vue.use(VanImage);
     Vue.use(Grid);
+     Vue.use(Lazyload);
     Vue.use(GridItem);
     Vue.use(Col);
     Vue.use(Row);
@@ -68,18 +70,34 @@
                     wallet: wallet,
                     record: record
                 },
+                userInfo:{
+                    userName:'未登录',
+                    phone:''
+                },
             };
+           
         },
         computed: {},
         components: {
             pageFooter: () => import("@/components/pageFooter/index"),
         },
         created() {
+            if(localStorage.getItem("isLogin")=="true"){
+                this.userInfo.userName=localStorage.userName;
+                this.userInfo.phone=localStorage.phone;
+            }
         },
         mounted() {
 
         },
-        methods: {}
+        methods: {
+            login(){
+                if(localStorage.getItem("isLogin") !="true"){
+                    this.$router.push("/login");
+                }
+
+            }
+        }
     };
 </script>
 
