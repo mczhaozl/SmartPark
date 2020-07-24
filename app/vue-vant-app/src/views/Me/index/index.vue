@@ -13,14 +13,14 @@
                                height="2rem" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
                 </van-col>
                 <van-col span="20" style="padding-left: 1rem;padding-top: 0.3rem">
-                    <van-row style="font-size:0.5rem;font-weight: bold;color: #646566" @click="login">{{userInfo.userName}}</van-row>
-                    <van-row style="margin-top: 15px">{{userInfo.phone}}</van-row>
+                    <van-row style="font-size:0.5rem;font-weight: bold;color: #646566" @click="login">{{userInfo.realname}}</van-row>
+                    <van-row style="margin-top: 15px" @click="login">{{userInfo.phone}}</van-row>
                 </van-col>
             </van-row>
         </div>
         <div class="van-card">
             <van-grid :border="false">
-                <van-grid-item :icon="icon.car" text="我的车辆" to="/login" />
+                <van-grid-item :icon="icon.car" text="我的车辆" to="/me/carList" />
                 <van-grid-item :icon="icon.appointment" text="我的预约"/>
                 <van-grid-item :icon="icon.wallet" text="我的钱包"/>
                 <van-grid-item :icon="icon.record" text="停车记录"/>
@@ -71,7 +71,7 @@
                     record: record
                 },
                 userInfo:{
-                    userName:'未登录',
+                    realname:'未登录',
                     phone:''
                 },
             };
@@ -83,7 +83,7 @@
         },
         created() {
             if(localStorage.getItem("isLogin")=="true"){
-                this.userInfo.userName=localStorage.userName;
+                this.userInfo.realname=localStorage.realname;
                 this.userInfo.phone=localStorage.phone;
             }
         },
@@ -92,9 +92,10 @@
         },
         methods: {
             login(){
-                if(localStorage.getItem("isLogin") !="true"){
-                    this.$router.push("/login");
-                }
+                // if(localStorage.getItem("isLogin") !="true"){
+                //     this.$router.push("/login");
+                // }
+                this.$router.push("/login");
 
             }
         }

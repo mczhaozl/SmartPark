@@ -97,7 +97,8 @@ export default {
                     // 加载状态结束
                     if(data.code === 200){
                       localStorage.setItem("token",data.result.token);
-                      localStorage.setItem("userName",data.result.userInfo.realname);
+                      localStorage.setItem("realname",data.result.userInfo.realname);
+                      localStorage.setItem("userName",data.result.userInfo.username);
                       localStorage.setItem("phone",data.result.userInfo.phone);
                       localStorage.setItem("isLogin","true");
                       this.$router.push("/me");

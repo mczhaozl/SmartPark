@@ -14,6 +14,16 @@ const index = {
         component: () => import("@/views/Me/index"),
         name: "TeamsIndex",
         meta: { title: "我的", icon: "" }
+    },{
+        path: "mycar",
+        component: () => import("@/views/Me/mycar/index"),
+        name: "mycar",
+        meta: { title: "车辆绑定", icon: "" }
+    },{
+        path: "carList",
+        component: () => import("@/views/Me/carlist/carList"),
+        name: "carList",
+        meta: { title: "我的车辆", icon: "" }
     }]
 };
 
