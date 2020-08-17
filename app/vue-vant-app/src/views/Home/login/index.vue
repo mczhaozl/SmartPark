@@ -33,6 +33,7 @@ import {postAction} from '@/api/manage';
 import Router from "vue-router";
 import VueRouter from 'vue-router';
 
+
 export default {
   name: "Login",
   data() {
@@ -89,7 +90,7 @@ export default {
       }
       // 获取登录接口数据
   
-      postAction(window._CONFIG['domianURL'] + '/sys/login', {
+      postAction(window._CONFIG['domianURL'] + '/sys/mLogin', {
                         'username': vm.userData.username,
                         'password': vm.userData.password
                     }

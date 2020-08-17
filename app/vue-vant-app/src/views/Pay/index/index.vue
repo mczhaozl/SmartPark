@@ -55,7 +55,7 @@
 </script>
 
 <style scoped>
-    /deep/ .van-nav-bar__title{
+     .van-nav-bar__title{
         color: #3282F9 !important;
     }
 </style>

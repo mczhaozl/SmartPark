@@ -5,8 +5,12 @@
                 left-text=""
                 :fixed="fixed"
                 left-arrow
+                plus
                 @click-left="onClickLeft"
         />
+
+        <!-- <van-icon name="plus" />
+        <van-icon name="arrow-left" /> -->
         <div class="van-card">
             <van-list  @load="ontLoad">
                 <van-cell v-for="(item,index) in carList" :key="index">
@@ -14,8 +18,8 @@
                 </van-cell>
             </van-list>
         </div>
-        <div class="am-margin-top-xl">
-          <van-button type="primary" size="large" to="/me/mycar">新增车辆</van-button>
+        <div class="am-margin-top-xl" style="margin: 16px;">
+          <van-button round block  type="primary" size="large" to="/me/mycar">新增车辆</van-button>
         </div>
     </div>
     
@@ -81,6 +85,7 @@
                             that.isTEmpty = true
                         }
                     }
+                    Toast.clear();
                 })
             },
             onClickLeft(){

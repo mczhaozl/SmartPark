@@ -1,8 +1,73 @@
 <template>
   <div class="page-header-index-wide">
     <a-row :gutter="24">
+     
+      <!-- <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="订单量" :total="8846 | NumberFormat">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+            <mini-area />
+          </div>
+          <template slot="footer">日订单量<span> {{ '1234' | NumberFormat }}</span></template>
+        </chart-card>
+      </a-col> -->
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总销售额" total="￥126,560">
+        <chart-card :loading="loading" title="总车位数" :total="totalPkLot">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+            <trend f style="margin-right: 16px;">
+              <span :style="{ color: 'red' }" slot="term">已使用 {{usedPkLot}}%</span>
+             
+            </trend>
+            <trend >
+              <span  :style="{ color: 'rgb(19, 194, 194)' }" slot="term">未使用 {{unusedPkLot}}%</span>
+              
+            </trend>
+          </div>
+          <template slot="footer">空余车位数<span>{{freePKLot}}</span></template>
+        </chart-card>
+      </a-col>
+
+
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="总注册车辆数" :total="totalCarNum">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+            <trend f style="margin-right: 16px;">
+              <span :style="{ color: 'red' }" slot="term">燃油车 {{oldCarPercent}}%</span>
+             
+            </trend>
+            <trend >
+              <span  :style="{ color: 'rgb(19, 194, 194)' }" slot="term">新能源车 {{newCarPercent}}%</span>
+              
+            </trend>
+          </div>
+          <template slot="footer">燃油车数量<span> {{oldCarNum}}</span></template>
+        </chart-card>
+      </a-col>
+
+
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="支付笔数" :total="6560 | NumberFormat">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+            <mini-bar :height="40" :dataSource="barData" />
+          </div>
+          <template slot="footer">转化率 <span>60%</span></template>
+        </chart-card>
+      </a-col>
+
+
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="总缴费额" total="￥126,560">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -16,32 +81,11 @@
               11%
             </trend>
           </div>
-          <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+          <template slot="footer">日均缴费额<span>￥ 234.56</span></template>
         </chart-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="订单量" :total="8846 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-area />
-          </div>
-          <template slot="footer">日订单量<span> {{ '1234' | NumberFormat }}</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="支付笔数" :total="6560 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-bar :height="40" />
-          </div>
-          <template slot="footer">转化率 <span>60%</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+
+      <!-- <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" title="运营活动效果" total="78%">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
@@ -60,13 +104,13 @@
             </trend>
           </template>
         </chart-card>
-      </a-col>
+      </a-col> -->
     </a-row>
 
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-          <div class="extra-wrapper" slot="tabBarExtraContent">
+          <!-- <div class="extra-wrapper" slot="tabBarExtraContent">
             <div class="extra-item">
               <a>今日</a>
               <a>本周</a>
@@ -74,27 +118,27 @@
               <a>本年</a>
             </div>
             <a-range-picker :style="{width: '256px'}" />
-          </div>
-          <a-tab-pane loading="true" tab="销售额" key="1">
+          </div> -->
+          <a-tab-pane loading="true" tab="订单量" key="1">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="销售额排行" :dataSource="barData"/>
+                <bar title="新增订单排行" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
+                <rank-list title="停车场空余车位数" :list="rankList"/>
               </a-col>
             </a-row>
           </a-tab-pane>
-          <a-tab-pane tab="销售趋势" key="2">
+          <!-- <a-tab-pane tab="销售趋势" key="2">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
                 <bar title="销售额趋势" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
+                <rank-list title="停车场空余车位数" :list="rankList"/>
               </a-col>
             </a-row>
-          </a-tab-pane>
+          </a-tab-pane> -->
         </a-tabs>
       </div>
     </a-card>
@@ -149,14 +193,16 @@
 
   import Trend from '@/components/Trend'
   import { getLoginfo,getVisitInfo } from '@/api/api'
+  import { putAction,postAction,getAction } from '@/api/manage'
+
 
   const rankList = []
-  for (let i = 0; i < 7; i++) {
-    rankList.push({
-      name: '白鹭岛 ' + (i+1) + ' 号店',
-      total: 1234.56 - i * 100
-    })
-  }
+  // for (let i = 0; i < 7; i++) {
+  //   rankList.push({
+  //     name: '白鹭岛 ' + (i+1) + ' 号店',
+  //     total: 1234.56 - i * 100
+  //   })
+  // }
   const barData = []
   for (let i = 0; i < 12; i += 1) {
     barData.push({
@@ -188,7 +234,15 @@
         loginfo:{},
         visitFields:['ip','visit'],
         visitInfo:[],
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
+        totalPkLot:'0',
+        freePKLot:'0',
+        usedPkLot:'0',
+        unusedPkLot:'0',
+        totalCarNum:'0',
+        oldCarNum:'0',
+        oldCarPercent:'0',
+        newCarPercent:'0'
       }
     },
     created() {
@@ -196,6 +250,55 @@
         this.loading = !this.loading
       }, 1000)
       this.initLogInfo();
+
+      getAction(`/parking/pkParkingLot/getTotalAndFreeNum`).then(res=>{
+          if(res.success){
+           this.totalPkLot= res.result.totalLot
+           this.freePKLot=res.result.freeLot
+           this.usedPkLot=((this.freePKLot*10000)/(this.totalPkLot*100)).toFixed(2)
+           this.unusedPkLot=100-this.usedPkLot
+         
+          }else{
+          
+          }
+        }).catch(()=>{
+         
+        });
+
+      getAction(`/parking/pkCar/findCarCountByType`).then(res=>{
+          if(res.success){
+             this.totalCarNum=res.result[0].tolnum;
+             this.oldCarNum=res.result[0].oldnum;
+             this.oldCarPercent=((this.oldCarNum*10000)/(this.totalCarNum*100)).toFixed(2);
+             this.newCarPercent=100-this.oldCarPercent;
+           
+         
+          }else{
+           
+          }
+        }).catch(()=>{
+         
+        })
+
+
+        getAction(`/parking/pkParkingLot/getFreeLotRank`).then(res=>{
+          if(res.success){
+            
+           for (let i = 0; i <res.result.length; i++) {
+            rankList.push({
+              name: res.result[i].name,
+              total: res.result[i].freeLot
+            })
+          }
+         
+          }else{
+           
+          }
+        }).catch(()=>{
+         
+        })
+
+
     },
     methods: {
       initLogInfo () {
@@ -209,7 +312,6 @@
         })
         getVisitInfo().then(res=>{
           if(res.success){
-             console.log("aaaaaa",res.result)
              this.visitInfo = res.result;
            }
          })

@@ -453,25 +453,13 @@
                     
                 })
 
-                    // let data = {
-                    //     vehiclenum: num
-                    // }
-                    // this.$http.post(ADD_VEHICLE, data).then(res => {
-                    //   if (res.data.ret === 0) {
-                    //     this.addedCarNum = num
-                    //     this.$router.push({name: 'AddSuccess', params: {addedCarNum: this.addedCarNum}})
-                    //   } else {
-                    //     this.$dialog.toast({mes:res.data.message,timeout:1200})
-                    //   }
-                    // })
+                
                 }
             },
             onClickLeft(){
                  this.$router.push("/me/carList")
             }
-            // addCar(){
-
-            // }
+       
         },
         mounted () {
             this.btnClickYue()

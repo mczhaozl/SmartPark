@@ -20,7 +20,7 @@
         </div>
         <div class="van-card">
             <van-grid :border="false">
-                <van-grid-item :icon="icon.car" text="我的车辆" to="/me/carList" />
+                <van-grid-item :icon="icon.car" text="我的车辆" @click="getCarList" />
                 <van-grid-item :icon="icon.appointment" text="我的预约"/>
                 <van-grid-item :icon="icon.wallet" text="我的钱包"/>
                 <van-grid-item :icon="icon.record" text="停车记录"/>
@@ -52,7 +52,7 @@
 
     Vue.use(VanImage);
     Vue.use(Grid);
-     Vue.use(Lazyload);
+    Vue.use(Lazyload);
     Vue.use(GridItem);
     Vue.use(Col);
     Vue.use(Row);
@@ -92,11 +92,17 @@
         },
         methods: {
             login(){
-                // if(localStorage.getItem("isLogin") !="true"){
-                //     this.$router.push("/login");
-                // }
-                this.$router.push("/login");
-
+                 if(localStorage.getItem("isLogin") !="true"){
+                    this.$router.push("/login");
+                 }
+               
+            },
+            getCarList(){
+                  if(localStorage.getItem("isLogin") !="true"){
+                        this.$router.push("/login");
+                  }else{
+                        this.$router.push("/me/carList");
+                  }
             }
         }
     };

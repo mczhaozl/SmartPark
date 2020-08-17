@@ -120,6 +120,7 @@
     import audio from '@/assets/images/audio.png'
     import nav from '@/assets/images/nav.png'
     import {lazyAMapApiLoaderInstance} from 'vue-amap';
+    import {getAction, getFileAccessHttpUrl} from '@/api/manage';
 
     Vue.use(VanImage);
     Vue.use(Tag);
@@ -175,8 +176,22 @@
                 position: {lat: '', lng: ''},
                 //centerPosition: {},
                 zjnDistance: 0,
-                gyDistance: 0
+                gyDistance: 0,
+                pkLotList:[],
+                nearbyPkLotList:[],
             }
+        },
+        created() {
+          getAction(window._CONFIG['domianURL'] + '/parking/pkParkingLot/list', {
+     
+            }).then(data => {
+                    // 加载状态结束
+               
+                    this.pkLotList=data.result.records;
+                    
+                })
+
+               
         },
         mounted() {
             lazyAMapApiLoaderInstance.load().then(() => {
@@ -210,45 +225,87 @@
                     AMap.event.addListener(geolocation, 'error', that.onError);      //返回定位出错信息
                 });
                 //标注，中节能停车场和公园停车场
-                let content = '<div class="marker"><img src="https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png"><span class="markerLable">860</span></div>';
-                that.marker = new AMap.Marker({
-                    title: '中节能停车场',
-                    content: content,
-                    //设置基点偏移
-                    offset: new AMap.Pixel(-10, -10),
-                    map: that.map,
-                    showPositionPoint: true,
-                    position: new AMap.LngLat(115.994359, 28.689567),
-                    zIndex: 100
-                });
-                let content1 = '<div class="marker"><img src="https://webapi.amap.com/theme/v1.3/markers/b/mark_r.png"><span style=" color: white;\n' +
-                    '        position: fixed;\n' +
-                    '        margin-top: 0.15rem;\n' +
-                    '        margin-left: -0.50rem;\n' +
-                    '        font-weight: bold;">2</span></div>';
-                that.marker1 = new AMap.Marker({
-                    title: '公园停车场',
-                    content: content1,
-                    //设置基点偏移
-                    offset: new AMap.Pixel(-10, -10),
-                    map: that.map,
-                    showPositionPoint: true,
-                    position: new AMap.LngLat(115.993054, 28.690579),
-                    zIndex: 100
-                });
-                that.marker1.on('click', function () {
-                    that.show = true;
-                    that.action = false;
-                    that.park1 = false;
-                    that.park2 = true;
-                }, that);
-                that.marker.on('click', function () {
-                    that.show = true;
-                    that.action = false;
-                    that.park1 = true;
-                    that.park2 = false;
-                }, that);
-                //  });
+                this.pkLotList.forEach((item)=>{
+                   let content = '<div class="marker"><img src="https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png"><span class="markerLable">'+item.freeLot+'</span></div>';
+                    console.log(item.longitude,item.latitude);
+                    let  toLng , toLat;
+                   
+                   AMap.convertFrom(item.longitude+","+item.latitude,"baidu",
+                    function(status,result){
+                        if(status=="complete"){
+                            toLng=result.locations[0].lng;
+                            toLat=result.locations[0].lat;
+                            let marker = new AMap.Marker({
+                                title: item.name,
+                                content: content,
+                                //设置基点偏移
+                                offset: new AMap.Pixel(-10, -10),
+                                map: that.map,
+                                showPositionPoint: true,
+                                position: new AMap.LngLat(toLng,toLat),
+                                zIndex: 100
+                            });
+
+                            marker.on('click', function () {
+                                that.show = true;
+                                that.action = false;
+                                // that.park1 = false;
+                                // that.park2 = true;
+                            }, that);
+                        }else{
+                            console.log(status+"/"+result);
+                            alert("获取位置失败,请重试");
+                        }
+                    });
+                   
+                   
+
+                })
+
+           
+                // let content = '<div class="marker"><img src="https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png"><span class="markerLable">860</span></div>';
+                // that.marker = new AMap.Marker({
+                //     title: '中节能停车场',
+                //     content: content,
+                //     //设置基点偏移
+                //     offset: new AMap.Pixel(-10, -10),
+                //     map: that.map,
+                //     showPositionPoint: true,
+                //     position: new AMap.LngLat(115.994359, 28.689567),
+                //     zIndex: 100
+                // });
+                // let content1 = '<div class="marker"><img src="https://webapi.amap.com/theme/v1.3/markers/b/mark_r.png"><span style=" color: white;\n' +
+                //     '        position: fixed;\n' +
+                //     '        margin-top: 0.15rem;\n' +
+                //     '        margin-left: -0.50rem;\n' +
+                //     '        font-weight: bold;">2</span></div>';
+                // that.marker1 = new AMap.Marker({
+                //     title: '公园停车场',
+                //     content: content1,
+                //     //设置基点偏移
+                //     offset: new AMap.Pixel(-10, -10),
+                //     map: that.map,
+                //     showPositionPoint: true,
+                //     position: new AMap.LngLat(115.993054, 28.690579),
+                //     zIndex: 100
+                // });
+                // that.marker1.on('click', function () {
+                //     that.show = true;
+                //     that.action = false;
+                //     that.park1 = false;
+                //     that.park2 = true;
+                // }, that);
+                // that.marker.on('click', function () {
+                //     that.show = true;
+                //     that.action = false;
+                //     that.park1 = true;
+                //     that.park2 = false;
+                // }, that);
+                // //  });
+
+
+                 
+               
 
                 let traffic = new AMap.TileLayer.Traffic({
                     'autoRefresh': true,     //是否自动刷新，默认为false
@@ -269,7 +326,7 @@
                         that.onComputeDistance(positionResult.position);
                         //
                         that.dispaly(that.distance);
-                        console.log(positionResult);
+                        // console.log(positionResult);
                     });
                     positionPicker.on('fail', function (positionResult) {
 
@@ -279,8 +336,8 @@
                 window.onload = function () {
                     document.getElementById("container").height = document.documentElement.clientHeight;
                 };
-
-                if (device.platform.toLowerCase() == 'ios') {
+       
+                if (that.device.platform.toLowerCase() == 'ios') {
                     appAvailability.check(
                         'iosamap://', // 高德地图
                         function () {  // Success callback
@@ -319,7 +376,7 @@
                     );
                 }
 
-                if (device.platform.toLowerCase() == 'android') {
+                if (that.device.platform.toLowerCase() == 'android') {
                     appAvailability.check(
                         'com.autonavi.minimap', // 高德地图
                         function () {           // Success callback
@@ -434,6 +491,11 @@
                 //115.992995,28.690999,公园
                 //115.994383,28.689559,中能
                 //计算到中节能停车场的距离
+                this.pkLotList.forEach(item =>{
+                    let Position = new AMap.LngLat(item.longitude,item.latitude);
+                    let range = Math.round(centerPosition.distance(Position));
+                  
+                })
                 let gyPosition = new AMap.LngLat(115.992995, 28.690999);
                 this.gyDistance = Math.round(centerPosition.distance(gyPosition));
                 //计算到公园停车场的距离
@@ -493,6 +555,7 @@
                 this.show = !this.show;
                 this.park1 = true;
                 this.park2 = true;
+                
             },
             onComplete(geolocationResult) {
                 this.position.lat = geolocationResult.position.getLat();
@@ -539,7 +602,7 @@
                     }
                     if (!(this.ggMap || this.txMap || this.gdMap || this.bdMap)) {
                         //默认高德下载
-                        if (device.platform.toLowerCase() == 'android') {
+                        if (that.device.platform.toLowerCase() == 'android') {
                             cordova.InAppBrowser.open("http://amapdownload.autonavi.com/down6/C3060/Amap_V10.35.2.2736_android_C3060_(Build2005202240).apk", '_system', 'hardwareback=no')
                         } else {
                             window.location.href = "itms-apps://itunes.apple.com/cn/app/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE-%E7%B2%BE%E5%87%86%E5%9C%B0%E5%9B%BE-%E5%AF%BC%E8%88%AA%E5%87%BA%E8%A1%8C%E5%BF%85%E5%A4%87/id461703208?mt=8";

@@ -18,6 +18,10 @@ const service = axios.create({
 // request 拦截器
 service.interceptors.request.use(
     config => {
+        const token = localStorage.token
+        if (token) {
+            config.headers[ 'X-Access-Token' ] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
+        }
         config.headers['Content-Type'] = 'application/json;charset=UTF-8';
         // 如果用戶信息存在
         config.headers['utoken'] = store.getters.userInfo.utoken ? store.getters.userInfo.utoken : ""; // 没有取本地调试token
@@ -48,6 +52,8 @@ service.interceptors.response.use(
     },
     err => {
         // 接口错误提示
+        const token = localStorage.token;
+       
         if (err.response && err.response.status) {
             let msg = '出错了'
             switch (err.response.status) {
@@ -67,8 +73,15 @@ service.interceptors.response.use(
                     msg = '请求超时'
                     break
                 case 500:
-                    msg = '服务器错误'
-                    break
+                    if(token && err.response.data.message=="Token失效，请重新登录"){
+                        msg = '登录失效，请重新登录！'
+                        layer.toast(msg)
+                        $router.push("/login");
+                        break
+                    }else{
+                        msg = '服务器错误'
+                        break
+                    }                   
                 case 501:
                     msg = '服务未实现'
                     break

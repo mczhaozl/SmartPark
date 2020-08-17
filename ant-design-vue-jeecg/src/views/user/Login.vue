@@ -9,7 +9,7 @@
           <a-form-item>
             <a-input
               size="large"
-              v-decorator="['username',{initialValue:'zadmin', rules: validatorRules.username.rules}]"
+              v-decorator="['username',{initialValue:currentUsername, rules: validatorRules.username.rules}]"
               type="text"
               placeholder="请输入帐户名">
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -18,7 +18,7 @@
 
           <a-form-item>
             <a-input
-              v-decorator="['password',{initialValue:'z.123456', rules: validatorRules.password.rules}]"
+              v-decorator="['password',{initialValue:'', rules: validatorRules.password.rules}]"
               size="large"
               type="password"
               autocomplete="false"
@@ -223,6 +223,8 @@
       Vue.ls.remove(ACCESS_TOKEN)
       this.getRouterData();
       this.handleChangeCheckCode();
+      this.currentUsername=this.$store.getters.userInfo.username;
+     
       // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
       //this.getEncrypte();
       // update-end- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
